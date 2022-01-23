@@ -137,12 +137,12 @@ def pregunta_05():
     
     for row in columns_of_interest:
         if row[0] not in dict_of_tuples:
-            dict_of_tuples[row[0]] = (row[0],row[1],row[1])
+            dict_of_tuples[row[0]] = (row[0],int(row[1]),int(row[1]))
         else:
-            if row[1] > dict_of_tuples[row[0]][1]:
-                dict_of_tuples[row[0]] = (row[0],row[1],dict_of_tuples[row[0]][2])
-            elif row[1] < dict_of_tuples[row[0]][2]:
-                dict_of_tuples[row[0]] = (row[0],dict_of_tuples[row[0]][1],row[1])        
+            if int(row[1]) > int(dict_of_tuples[row[0]][1]):
+                dict_of_tuples[row[0]] = (row[0],int(row[1]),int(dict_of_tuples[row[0]][2]))
+            elif int(row[1]) < int(dict_of_tuples[row[0]][2]):
+                dict_of_tuples[row[0]] = (row[0],int(dict_of_tuples[row[0]][1]),int(row[1]))        
     return sorted(dict_of_tuples.values())
 
 
