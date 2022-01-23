@@ -289,7 +289,7 @@ def pregunta_09():
             dictionary[key] = 1
         else:
             dictionary[key] += 1
-    return str(dictionary)
+    return dictionary
 
 
 def pregunta_10():
@@ -350,15 +350,7 @@ def pregunta_11():
                 dictionary[key] = value
             else:
                 dictionary[key] += value
-    final_string = str(sorted(dictionary.items()))
-    final_string = final_string.replace('[', '{')
-    final_string = final_string.replace(']', '}')
-    final_string = final_string.replace('),', '*')
-    final_string = final_string.replace(',', ':')
-    final_string = final_string.replace('*', ',')
-    final_string = final_string.replace('(', '')
-    final_string = final_string.replace(')', '')
-    return final_string
+    return {k: dictionary[k] for k in sorted(dictionary)}
 
 
 def pregunta_12():
@@ -386,13 +378,14 @@ def pregunta_12():
             dictionary[key] = value
         else:
             dictionary[key] += value
+    # final_string = str(sorted(dictionary.items()))
+    # final_string = final_string.replace('[', '{')
+    # final_string = final_string.replace(']', '}')
+    # final_string = final_string.replace('),', '*')
+    # final_string = final_string.replace(',', ':')
+    # final_string = final_string.replace('*', ',')
+    # final_string = final_string.replace('(', '')
+    # final_string = final_string.replace(')', '')
+    # return final_string
+    return {k: dictionary[k] for k in sorted(dictionary)}
 
-    final_string = str(sorted(dictionary.items()))
-    final_string = final_string.replace('[', '{')
-    final_string = final_string.replace(']', '}')
-    final_string = final_string.replace('),', '*')
-    final_string = final_string.replace(',', ':')
-    final_string = final_string.replace('*', ',')
-    final_string = final_string.replace('(', '')
-    final_string = final_string.replace(')', '')
-    return final_string
