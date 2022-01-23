@@ -378,14 +378,5 @@ def pregunta_12():
             dictionary[key] = value
         else:
             dictionary[key] += value
-    # final_string = str(sorted(dictionary.items()))
-    # final_string = final_string.replace('[', '{')
-    # final_string = final_string.replace(']', '}')
-    # final_string = final_string.replace('),', '*')
-    # final_string = final_string.replace(',', ':')
-    # final_string = final_string.replace('*', ',')
-    # final_string = final_string.replace('(', '')
-    # final_string = final_string.replace(')', '')
-    # return final_string
     return {k: dictionary[k] for k in sorted(dictionary)}
 
