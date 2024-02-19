@@ -21,8 +21,13 @@ def pregunta_01():
     214
 
     """
-    return
-
+    sum = 0
+    data = open('data.csv', 'r').readlines()
+    data_orgnized = [row.split() for row in data]
+    column = [row[1] for row in data_orgnized]
+    for num in column:
+        sum += int(num) 
+    return sum
 
 def pregunta_02():
     """
@@ -39,8 +44,16 @@ def pregunta_02():
     ]
 
     """
-    return
-
+    counter_dict = {}
+    data = open('data.csv', 'r').readlines()
+    data_orgnized = [row.split() for row in data]
+    columns_of_interest = [row[0:2] for row in data_orgnized]
+    for row in columns_of_interest:
+        if row[0] in counter_dict:
+            counter_dict[row[0]] += 1
+        else:
+            counter_dict[row[0]] = 1
+    return sorted(counter_dict.items())
 
 def pregunta_03():
     """
@@ -57,8 +70,16 @@ def pregunta_03():
     ]
 
     """
-    return
-
+    counter_dict = {}
+    data = open('data.csv', 'r').readlines()
+    data_orgnized = [row.split() for row in data]
+    columns_of_interest = [row[0:2] for row in data_orgnized]
+    for row in columns_of_interest:
+        if row[0] in counter_dict:
+            counter_dict[row[0]] += int(row[1])
+        else:
+            counter_dict[row[0]] = int(row[1])
+    return sorted(counter_dict.items())
 
 def pregunta_04():
     """
@@ -82,8 +103,17 @@ def pregunta_04():
     ]
 
     """
-    return
-
+    month_dict={}
+    data = open('data.csv', 'r').readlines()
+    data_orgnized = [row.split() for row in data]
+    date_column = [row[2] for row in data_orgnized]
+    month_column = [row.split('-')[1] for row in date_column]
+    for month in month_column:
+        if month in month_dict:
+            month_dict[month] += 1
+        else:
+            month_dict[month] = 1 
+    return sorted(month_dict.items())
 
 def pregunta_05():
     """
@@ -100,7 +130,20 @@ def pregunta_05():
     ]
 
     """
-    return
+    dict_of_tuples = {} 
+    data = open('data.csv', 'r').readlines()
+    data_orgnized = [row.split() for row in data]
+    columns_of_interest = [row[0:2] for row in data_orgnized]
+    
+    for row in columns_of_interest:
+        if row[0] not in dict_of_tuples:
+            dict_of_tuples[row[0]] = (row[0],int(row[1]),int(row[1]))
+        else:
+            if int(row[1]) > int(dict_of_tuples[row[0]][1]):
+                dict_of_tuples[row[0]] = (row[0],int(row[1]),int(dict_of_tuples[row[0]][2]))
+            elif int(row[1]) < int(dict_of_tuples[row[0]][2]):
+                dict_of_tuples[row[0]] = (row[0],int(dict_of_tuples[row[0]][1]),int(row[1]))        
+    return sorted(dict_of_tuples.values())
 
 
 def pregunta_06():
@@ -125,7 +168,21 @@ def pregunta_06():
     ]
 
     """
-    return
+    dict_of_tuples = {} 
+    data = open('data.csv', 'r').readlines()
+    dictionaries_per_row = [row.split()[4].split(',') for row in data]
+    global_dictionary_list = []
+    [global_dictionary_list.extend(dictionaries_per_row[i]) for i in range(len(dictionaries_per_row))]
+    for item in global_dictionary_list:
+        key,value = item.split(':')
+        if key not in dict_of_tuples:
+            dict_of_tuples[key] = (key,int(value),int(value))
+        else:
+            if int(value) < dict_of_tuples[key][1]:
+                dict_of_tuples[key] = (key, int(value), dict_of_tuples[key][2])
+            elif int(value) > dict_of_tuples[key][2]:
+                dict_of_tuples[key] = (key, dict_of_tuples[key][1], int(value))
+    return sorted(dict_of_tuples.values())
 
 
 def pregunta_07():
@@ -149,7 +206,17 @@ def pregunta_07():
     ]
 
     """
-    return
+    data = open('data.csv', 'r').readlines()
+    columns_of_interest = [row.split()[0:2] for row in data]
+    dictionary_of_tuples = {}
+    for item in columns_of_interest:
+        value, key = item
+        key = int(key)
+        if key in dictionary_of_tuples:
+            dictionary_of_tuples[key].append(value)
+        else:
+            dictionary_of_tuples[key] = [value]
+    return sorted(dictionary_of_tuples.items())
 
 
 def pregunta_08():
@@ -174,7 +241,20 @@ def pregunta_08():
     ]
 
     """
-    return
+    data = open('data.csv', 'r').readlines()
+    columns_of_interest = [row.split()[0:2] for row in data]
+    dictionary_of_tuples = {}
+    for item in columns_of_interest:
+        value, key = item
+        key = int(key)
+        if key in dictionary_of_tuples:
+            if value not in dictionary_of_tuples[key]:
+                dictionary_of_tuples[key].append(value)
+        else:
+            dictionary_of_tuples[key] = [value]
+    for item in dictionary_of_tuples:
+        dictionary_of_tuples[item] = sorted(dictionary_of_tuples[item])
+    return sorted(dictionary_of_tuples.items())
 
 
 def pregunta_09():
@@ -197,7 +277,19 @@ def pregunta_09():
     }
 
     """
-    return
+    dictionary = {} 
+    data = open('data.csv', 'r').readlines()
+    dictionaries_per_row = [row.split()[4].split(',') for row in data]
+    global_dictionary_list = []
+    [global_dictionary_list.extend(dictionaries_per_row[i]) for i in range(len(dictionaries_per_row))]
+    global_dictionary_list = sorted(global_dictionary_list)
+    for item in global_dictionary_list:
+        key, value = item.split(':')
+        if key not in dictionary:
+            dictionary[key] = 1
+        else:
+            dictionary[key] += 1
+    return dictionary
 
 
 def pregunta_10():
@@ -218,7 +310,14 @@ def pregunta_10():
 
 
     """
-    return
+    data = open('data.csv', 'r').readlines()
+    letter = [row[0] for row in data]
+    set_of_letters = [row.split()[3].split(',') for row in data]
+    column_with_dict = [row.split()[4].split(',') for row in data]
+    list_of_tuples = []
+    for i in range (len(letter)):
+        list_of_tuples.append((letter[i],len(set_of_letters[i]),len(column_with_dict[i])))
+    return list_of_tuples
 
 
 def pregunta_11():
@@ -239,7 +338,19 @@ def pregunta_11():
 
 
     """
-    return
+    data = open('data.csv', 'r').readlines()
+    column_of_numbers = [row.split()[1] for row in data]
+    column_of_letters = [row.split()[3].split(',') for row in data]
+    dictionary = {}
+    for i in range (len(column_of_letters)):
+        for letter in column_of_letters[i]:
+            key = letter
+            value = int(column_of_numbers[i])
+            if key not in dictionary:
+                dictionary[key] = value
+            else:
+                dictionary[key] += value
+    return {k: dictionary[k] for k in sorted(dictionary)}
 
 
 def pregunta_12():
@@ -257,4 +368,15 @@ def pregunta_12():
     }
 
     """
-    return
+    data = open('data.csv', 'r').readlines()
+    data = [row.split() for row in data]
+    data_of_interest = [[row[0], sum([int(line.split(":")[1]) for line in row[4].split(",")])] for row in data]
+    dictionary = {}
+    for row in data_of_interest:
+        key, value = row
+        if key not in dictionary:
+            dictionary[key] = value
+        else:
+            dictionary[key] += value
+    return {k: dictionary[k] for k in sorted(dictionary)}
+
